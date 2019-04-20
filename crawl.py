@@ -5,7 +5,10 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 import mysql.connector
 import sys
+import logging
 
+
+logging.basicConfig(filename = 'crawls.log', format = '%(asctime)s:%(levelname)s: %(message)s', level = logging.DEBUG)
 
 urls = ["https://www.lemonde.fr/", 
         "http://www.lefigaro.fr/",
@@ -30,7 +33,7 @@ try:
                                         password='',
                                         db='scraper')
 except Exception as e:
-    print(f"Error connecting to db: {e}")
+    logging.error(f"Error connecting to db: {e}")
     sys.exit('Execution failed')
 
 
@@ -158,7 +161,7 @@ def upload_articles_titles(cleaned_titles, original_titles, journal_id):
         return row_counts
 
     except Exception as e:
-        print(f"Error : {e}")
+        logging.error(f"Error : {e}")
 
 ###
 # The App
@@ -172,12 +175,12 @@ try:
     cleaned_list_LE, original_list_LE = get_articles_titles_LE()
 
 except Exception as e:
-    print(f"Error retrieving titles: {e}")
+    logging.critical(f"Error retrieving titles: {e}")
     sys.exit('Execution failed')
 
 else:
     time_retrieved = datetime.now()
-    print("Titles retrieved in {0}s".format(time_retrieved - start_time))
+    logging.info("Titles retrieved in {0}s".format(time_retrieved - start_time))
 
     try:
         rows_inserted = 0
@@ -189,11 +192,11 @@ else:
         rows_inserted += upload_articles_titles(cleaned_list_LE, original_list_LE, 5)
 
     except Exception as e:
-        print(f"Error uploading titles in db: {e}")
+        logging.critical(f"Error uploading titles in db: {e}")
         sys.exit('Execution failed')
 
     else:
         time_uploaded = datetime.now() - time_retrieved
-        print(f"{rows_inserted} Titles uploaded in {time_uploaded}s")
+        logging.info(f"{rows_inserted} Titles uploaded in {time_uploaded}s")
 
 connection.close()

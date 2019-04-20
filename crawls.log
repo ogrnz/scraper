@@ -1,0 +1,7 @@
+2019-04-20 19:27:43,434 : INFO : Titles retrieved in 0:00:08.866320s
+2019-04-20 19:27:43,648 : INFO : 10 Titles uploaded in 0:00:00.214148s
+2019-04-20 19:28:02,106 : ERROR : Error connecting to db: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2019-04-20 19:28:23,088:ERROR : Error connecting to db: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2019-04-20 19:28:33,007:ERROR: Error connecting to db: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2019-04-20 19:28:55,133:INFO: Titles retrieved in 0:00:08.521095s
+2019-04-20 19:28:55,431:INFO: 1 Titles uploaded in 0:00:00.298204s
