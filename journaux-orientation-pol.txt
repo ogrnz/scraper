@@ -1,0 +1,22 @@
+ Quotidiens français :
+
+    Le Monde : centre gauche
+    Le Figaro : droite
+    Libération : gauche
+    Les Echos : libéral
+    L'Humanité : gauche communiste
+
+
+Hebdomadaires français :
+
+    Le Nouvel Observateur : gauche
+    L'Express : droite
+    Le Point : droite
+    Marianne : gauche
+    Courrier international : gauche
+    Journal du dimanche : droite
+    Le Canard enchaîné : gauche, contestataire
+    Charlie Hebdo : gauche
+    Alternatives économiques : gauche
+    Valeurs actuelles : extrême droite
+    Minute : extrême droite
