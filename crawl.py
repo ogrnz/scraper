@@ -180,7 +180,7 @@ except Exception as e:
 
 else:
     time_retrieved = datetime.now()
-    logging.info("Titles retrieved in {0}s".format(time_retrieved - start_time))
+    logging.info(f"Titles retrieved in {time_retrieved - start_time}s")
 
     try:
         rows_inserted = 0
