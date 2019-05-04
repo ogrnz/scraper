@@ -26,8 +26,6 @@ JOURNAL_IDS = {
     "L Humanite": 4,
     "Les Echos": 5
 }
-start_time = datetime.now()
-date_now = "{}-{}-{}".format(start_time.year, start_time.month, start_time.day)
 
 try:
     connection = mysql.connector.connect(host='localhost',
@@ -146,6 +144,8 @@ def get_articles_titles_LE():
 
 
 def upload_articles_titles(cleaned_titles, original_titles, journal_id):
+    start_time = datetime.now()
+    date_now = "{}-{}-{}".format(start_time.year, start_time.month, start_time.day)
     try:
         row_counts = 0
         for cleaned_title, original_title in zip(cleaned_titles, original_titles):
@@ -169,6 +169,9 @@ def upload_articles_titles(cleaned_titles, original_titles, journal_id):
 # The App
 ###
 def run_the_app():
+    start_time = datetime.now()
+    date_now = "{}-{}-{}".format(start_time.year, start_time.month, start_time.day)
+
     try:
         cleaned_list_LM, original_list_LM = get_articles_titles_LM()
         cleaned_list_LF, original_list_LF = get_articles_titles_LF()
