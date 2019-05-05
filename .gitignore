@@ -1,4 +1,4 @@
 env-scraper/
 .vscode/
 scraper/
-crawl.log
+crawls.log

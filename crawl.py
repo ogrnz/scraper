@@ -6,11 +6,8 @@ from bs4 import BeautifulSoup
 import mysql.connector
 import sys
 import logging
-import schedule
-import time
 
-
-logging.basicConfig(filename = './scraper/crawls.log', format = '%(asctime)s:%(levelname)s: %(message)s', level = logging.DEBUG)
+logging.basicConfig(filename = 'crawls.log', format = '%(asctime)s:%(levelname)s: %(message)s', level = logging.DEBUG)
 
 urls = ["https://www.lemonde.fr/", 
         "http://www.lefigaro.fr/",
@@ -168,47 +165,39 @@ def upload_articles_titles(cleaned_titles, original_titles, journal_id):
 ###
 # The App
 ###
-def run_the_app():
-    start_time = datetime.now()
-    date_now = "{}-{}-{}".format(start_time.year, start_time.month, start_time.day)
+start_time = datetime.now()
+date_now = "{}-{}-{}".format(start_time.year, start_time.month, start_time.day)
+
+try:
+    cleaned_list_LM, original_list_LM = get_articles_titles_LM()
+    cleaned_list_LF, original_list_LF = get_articles_titles_LF()
+    cleaned_list_LI, original_list_LI = get_articles_titles_LI()
+    cleaned_list_LH, original_list_LH = get_articles_titles_LH()
+    cleaned_list_LE, original_list_LE = get_articles_titles_LE()
+
+except Exception as e:
+    logging.critical(f"Error retrieving titles: {e}")
+    sys.exit('Execution failed')
+
+else:
+    time_retrieved = datetime.now()
+    logging.info(f"Titles retrieved in {time_retrieved - start_time}s")
 
     try:
-        cleaned_list_LM, original_list_LM = get_articles_titles_LM()
-        cleaned_list_LF, original_list_LF = get_articles_titles_LF()
-        cleaned_list_LI, original_list_LI = get_articles_titles_LI()
-        cleaned_list_LH, original_list_LH = get_articles_titles_LH()
-        cleaned_list_LE, original_list_LE = get_articles_titles_LE()
+        rows_inserted = 0
+        rows_inserted += upload_articles_titles(cleaned_list_LM, original_list_LM, 1)
+
+        rows_inserted += upload_articles_titles(cleaned_list_LF, original_list_LF, 2)
+        rows_inserted += upload_articles_titles(cleaned_list_LI, original_list_LI, 3)
+        rows_inserted += upload_articles_titles(cleaned_list_LH, original_list_LH, 4)
+        rows_inserted += upload_articles_titles(cleaned_list_LE, original_list_LE, 5)
 
     except Exception as e:
-        logging.critical(f"Error retrieving titles: {e}")
+        logging.critical(f"Error uploading titles in db: {e}")
         sys.exit('Execution failed')
 
     else:
-        time_retrieved = datetime.now()
-        logging.info(f"Titles retrieved in {time_retrieved - start_time}s")
-
-        try:
-            rows_inserted = 0
-            rows_inserted += upload_articles_titles(cleaned_list_LM, original_list_LM, 1)
-
-            rows_inserted += upload_articles_titles(cleaned_list_LF, original_list_LF, 2)
-            rows_inserted += upload_articles_titles(cleaned_list_LI, original_list_LI, 3)
-            rows_inserted += upload_articles_titles(cleaned_list_LH, original_list_LH, 4)
-            rows_inserted += upload_articles_titles(cleaned_list_LE, original_list_LE, 5)
-
-        except Exception as e:
-            logging.critical(f"Error uploading titles in db: {e}")
-            sys.exit('Execution failed')
-
-        else:
-            time_uploaded = datetime.now() - time_retrieved
-            logging.info(f"{rows_inserted} Titles uploaded in {time_uploaded}s")
-    return
-
-schedule.every().minutes.do(run_the_app)
-
-while True:
-    schedule.run_pending()
-    time.sleep(1)
+        time_uploaded = datetime.now() - time_retrieved
+        logging.info(f"{rows_inserted} Titles uploaded in {time_uploaded}s")
 
 connection.close()
