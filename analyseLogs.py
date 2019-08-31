@@ -40,7 +40,7 @@ errors = x.getLog()
 """Prepare to send email if we have error(s)"""
 
 sender = 'web@whenwillibe10000daysold.icu'
-mail_pwd = 'JxoSgoythpRZ'
+mail_pwd = ''
 receiver = 'olivier.grognuz@gmail.com'
 message = """From: From Pi <web@whenwillibe10000daysold.icu>
 To: To Olivier <olivier.grognuz@gmail.com>
