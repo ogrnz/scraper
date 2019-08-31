@@ -39,11 +39,11 @@ errors = x.getLog()
 
 """Prepare to send email if we have error(s)"""
 
-sender = 'web@whenwillibe10000daysold.icu'
+sender = 'mail@mail.com'
 mail_pwd = ''
-receiver = 'olivier.grognuz@gmail.com'
-message = """From: From Pi <web@whenwillibe10000daysold.icu>
-To: To Olivier <olivier.grognuz@gmail.com>
+receiver = 'mail@mail.com'
+message = """From: From Pi <mail@mail.com>
+To: To Olivier <mail@mail.com>
 MIME-Version: 1.0
 Content-type: text/html
 Subject: Crawler errors detected
