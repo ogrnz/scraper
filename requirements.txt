@@ -12,5 +12,5 @@ schedule==0.6.0
 six==1.12.0
 soupsieve==2.8.4
 typed-ast==1.4.0
-virtualenv==20.36.1
+virtualenv==21.14.13
 wrapt==1.11.1
